@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+
+  varnish:
+    image: varnish:7.5.0
+    volumes:
+      - ./varnish/default.vcl:/etc/varnish/default.vcl
+    ports: 
+      - 8080:80
+  
+  main:
+    image: httpd:latest
+    volumes:
+      - ./main:/usr/local/apache2/htdocs/
+    ports:
+      - 8081:80
+  
+  header-footer:
+    image: httpd:latest
+    volumes:
+      - ./header-footer:/usr/local/apache2/htdocs/
+    ports:
+      - 8082:80
+  
+  products:
+    image: httpd:latest
+    volumes:
+      - ./products:/usr/local/apache2/htdocs/
+    ports:
+      - 8083:80
+  
+  social:
+    image: httpd:latest
+    volumes:
+      - ./social:/usr/local/apache2/htdocs/
+    ports:
+      - 8084:80
